@@ -9,3 +9,9 @@
     <a href="https://docs.microsoft.com/pt-br/sql/?view=sql-server-ver15">🔗 T-SQL / SQL Server</a>
 </h1>
 <p align="center">🚀 Documentação do T-SQL / SQL</p>
+
+### Features
+
+- [x] Planilha de Cobrança
+- [x] Planilha de Liberação de Pedidos
+- [ ] Informações de Clientes - 🚧 Em Desenvolvimento 🚧

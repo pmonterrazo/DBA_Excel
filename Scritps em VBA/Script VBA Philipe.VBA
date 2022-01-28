@@ -232,29 +232,3 @@ Sub Atualizar()
     
     MsgBox "Atualização Finalizada com Sucesso!"
 End Sub
-Sub Macro2()
-'
-' Macro2 Macro
-'
-
-'
-    
-End Sub
-Sub teste()
-'
-' teste Macro
-'
-
-'
-    Range("I2:J5").Select
-    Selection.EntireColumn.Hidden = True
-End Sub
-
-Sub Macro11()
-'
-' Macro11 Macro
-'
-
-'
-
-End Sub
