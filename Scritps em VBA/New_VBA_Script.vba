@@ -6,7 +6,7 @@ Sub Atualizar()
 
 '
     Range("F11").Select
-    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    Selection.ListObject.QueryTable.Refresh 
     Range("F19").Select
 
         
