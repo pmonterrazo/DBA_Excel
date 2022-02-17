@@ -35,7 +35,39 @@ SUM(
 SUM(
    CASE
       WHEN A.VDPEDIPE_CODR = 903129 THEN A.VDPEDIPE_QTDPRD
-   END) AS '903129'
+   END) AS '903129',
+
+SUM(
+   CASE
+      WHEN A.VDPEDIPE_CODR = 100559 
+      OR 
+      A.VDPEDIPE_CODR = 100579 
+      OR 
+      A.VDPEDIPE_CODR = 171690 
+         
+       THEN A.VDPEDIPE_QTDPRD
+   END) AS 'REFR. PEQ',
+
+SUM(
+      CASE
+         WHEN A.VDPEDIPE_CODR = 198579 
+         OR 
+         A.VDPEDIPE_CODR = 50473 
+         OR 
+         A.VDPEDIPE_CODR = 50475 
+         OR 
+         A.VDPEDIPE_CODR = 171620 
+         OR 
+         A.VDPEDIPE_CODR = 99900018 
+         OR 
+         A.VDPEDIPE_CODR = 197061 
+         OR 
+         A.VDPEDIPE_CODR = 197196 
+         OR 
+         A.VDPEDIPE_CODR = 33422 
+         
+         THEN A.VDPEDIPE_QTDPRD
+   END) AS 'REFR. GRD'
 
 FROM PEDIT01 AS A
 INNER JOIN PEDCP01 AS B ON A.VDPEDIPE_NIT=B.VDPEDCPE_NPED
