@@ -8,21 +8,6 @@ Sub Atualizar()
     Range("F11").Select
     Selection.ListObject.QueryTable.Refresh 
     Range("F19").Select
-
-        
-        
-  'Atualiza Faturamento Medio
-  '
-  '  Range("B4").Select
-  ' Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
-    
-  'Atualiza Historico de Consumo
-  
-   ' Range("E14").Select
-   ' Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
-    
-    'Formatando_Tabela
-    
     Range("Consulta5[[#Headers],[COD. CLIENTE]]").Select
     Range(Selection, Selection.End(xlToRight)).Select
     With Selection.Font
@@ -40,14 +25,6 @@ Sub Atualizar()
         .TintAndShade = 0
         .PatternTintAndShade = 0
     End With
-    ActiveWindow.ScrollColumn = 11
-    ActiveWindow.ScrollColumn = 10
-    ActiveWindow.ScrollColumn = 9
-    ActiveWindow.ScrollColumn = 8
-    ActiveWindow.ScrollColumn = 7
-    ActiveWindow.ScrollColumn = 6
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 6
     Range("L10").Select
     Range(Selection, Selection.End(xlToRight)).Select
     Range(Selection, Selection.End(xlToLeft)).Select
@@ -269,21 +246,6 @@ Sub Atualizar()
     Selection.AutoFill Destination:=Range("Consulta5[MESA MAD.]"), Type:= _
         xlFillDefault
     Range("Consulta5[MESA MAD.]").Select
-    ActiveWindow.ScrollColumn = 22
-    ActiveWindow.ScrollColumn = 21
-    ActiveWindow.ScrollColumn = 20
-    ActiveWindow.ScrollColumn = 19
-    ActiveWindow.ScrollColumn = 18
-    ActiveWindow.ScrollColumn = 17
-    ActiveWindow.ScrollColumn = 16
-    ActiveWindow.ScrollColumn = 15
-    ActiveWindow.ScrollColumn = 14
-    ActiveWindow.ScrollColumn = 13
-    ActiveWindow.ScrollColumn = 12
-    ActiveWindow.ScrollColumn = 11
-    ActiveWindow.ScrollColumn = 10
-    ActiveWindow.ScrollColumn = 9
-    ActiveWindow.ScrollColumn = 8
     Range("P10").Select
     ActiveCell.FormulaR1C1 = _
         "=SUMIF('Fat. Medio'!C[-15],[@[COD. CLIENTE]],'Fat. Medio'!C[-13])"
@@ -300,8 +262,6 @@ Sub Atualizar()
     Range("Consulta5[FAT MED.]").Select
         Columns("I:I").ColumnWidth = 8.14
     Columns("I:I").ColumnWidth = 9.57
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 6
     Columns("Q:Q").ColumnWidth = 8.29
     Columns("Q:Q").ColumnWidth = 13.43
     ActiveWindow.SmallScroll Down:=-6
@@ -319,14 +279,6 @@ Sub Atualizar()
     Selection.Replace What:="   ", Replacement:="", LookAt:=xlPart, _
         SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
         ReplaceFormat:=False, FormulaVersion:=xlReplaceFormula2
-    ActiveWindow.ScrollColumn = 20
-    ActiveWindow.ScrollColumn = 19
-    ActiveWindow.ScrollColumn = 18
-    ActiveWindow.ScrollColumn = 15
-    ActiveWindow.ScrollColumn = 10
-    ActiveWindow.ScrollColumn = 7
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 4
     Range("Consulta5[[#Headers],[LIBERAR]]").Select
     With Selection.Interior
         .Pattern = xlSolid
@@ -353,39 +305,3 @@ Sub Atualizar()
     Application.ScreenUpdating = True
     
     MsgBox "Atualização Finalizada com Sucesso!"
-
-End Sub
-
-Sub cev()
-'
-' cev Macro
-'
-
-'
-    Range("D13").Select
-    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
-End Sub
-Sub Macro12()
-'
-' Macro12 Macro
-'
-
-'
-
-End Sub
-Sub Macro13()
-'
-' Macro13 Macro
-'
-
-'
-
-End Sub
-Sub Macro14()
-'
-' Macro14 Macro
-'
-
-'
-
-End Sub
