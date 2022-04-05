@@ -1,78 +1,73 @@
-Sub Atualizar()
-'
-' Atualizar Macro
-'
+Sub Atualizando_PLP()
 
-'
-    Range("F11").Select
-    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
-    Range("F19").Select
-    ActiveSheet.Range("Consulta5[#Tudo]").RemoveDuplicates Columns:=2, Header:= _
-        xlYes
-        
-    'Formatando_Tabela
+
+'Atualizando_Planilha
+
+    Application.ScreenUpdating = False
+      
+      
+    Dim ultimo
+    Cells(100000, 12).Select
+    Selection.End(xlUp).Select
+    ultimo = ActiveCell.Row
     
-    Range("Consulta5[[#Headers],[COD. CLIENTE]]").Select
+    progresso.Show
+    
+    progresso.Analise.Visible = True
+    Sheets("ANALISE").Select
+    Cells(9, 4).Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.AnaliseOK.Visible = True
+    
+    progresso.Historico.Visible = True
+    Sheets("HIST_CONSUMO").Select
+    Range("HIST_CONSUMO[[#Headers],[NUM.PEDIDO]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.HistoricoOK.Visible = True
+    
+    progresso.Itens.Visible = True
+    Sheets("ITENS_PEDIDOS").Select
+    Range("ITENS_DO_PEDIDO[[#Headers],[COD. CLIENTE]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.ItensOK.Visible = True
+    
+    progresso.Fat.Visible = True
+    Sheets("FAT_MEDIO").Select
+    Range("FATURAMENTO_MEDIO[[#Headers],[COD CLI]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.FatOK.Visible = True
+    
+    progresso.Titulo.Visible = True
+    Sheets("TITL_CLIENTE").Select
+    Range("TITULO_DO_CLIENTE[[#Headers],[COD. CLIENTE]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.TituloOK.Visible = True
+    
+    progresso.Cev.Visible = True
+    Sheets("CEV").Select
+    Range("CEV_PROD[[#Headers],[NUM. CONTRATO]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    Range("CEV_QTD_CONTR[[#Headers],[NUM CONTR.]]").Select
+    Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
+    progresso.cevOk.Visible = True
+    
+    
+    'Formatando a Planilha
+    
+    progresso.Formulas.Visible = True
+    
+    Cells(11, 14).Select
+    Range(Cells(11, 37), Cells(10000, 37)).Activate
+    Selection.Clear
+    
+    ' Formatando_Dados_Info_Cliente
+    
+    Cells(9, 4).Select
     Range(Selection, Selection.End(xlToRight)).Select
-    With Selection.Font
-        .Color = -16744448
-        .TintAndShade = 0
-    End With
-    With Selection.Font
-        .ThemeColor = xlThemeColorDark1
-        .TintAndShade = 0
-    End With
-    With Selection.Interior
-        .Pattern = xlSolid
-        .PatternColorIndex = xlAutomatic
-        .Color = 32768
-        .TintAndShade = 0
-        .PatternTintAndShade = 0
-    End With
-    ActiveWindow.ScrollColumn = 11
-    ActiveWindow.ScrollColumn = 10
-    ActiveWindow.ScrollColumn = 9
-    ActiveWindow.ScrollColumn = 8
-    ActiveWindow.ScrollColumn = 7
-    ActiveWindow.ScrollColumn = 6
-    ActiveWindow.ScrollColumn = 5
-    ActiveWindow.ScrollColumn = 6
-    Range("L10").Select
-    Range(Selection, Selection.End(xlToRight)).Select
-    Range(Selection, Selection.End(xlToLeft)).Select
-    Range(Selection, Selection.End(xlToRight)).Select
-    Range("L10:N10").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"
-    Range("D10").Select
-    Range(Selection, Selection.End(xlToRight)).Select
-    Range(Selection, Selection.End(xlToRight)).Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Range(Selection, Selection.End(xlDown)).Select
-    With Selection.Interior
-        .Pattern = xlNone
-        .TintAndShade = 0
-        .PatternTintAndShade = 0
-    End With
-    Range("AB11").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Range(Selection, Selection.End(xlToLeft)).Select
-    Range(Selection, Selection.End(xlToLeft)).Select
-    Range(Selection, Selection.End(xlToLeft)).Select
-    Range(Selection, Selection.End(xlToLeft)).Select
-    Selection.Replace What:="   ", Replacement:="", LookAt:=xlPart, _
-        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
-        ReplaceFormat:=False, FormulaVersion:=xlReplaceFormula2
-    Selection.Replace What:="", Replacement:="-", LookAt:=xlPart, _
-        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
-        ReplaceFormat:=False, FormulaVersion:=xlReplaceFormula2
-    Range("Consulta5[[#Headers],[COD. CLIENTE]]").Select
-    Range(Selection, Selection.End(xlToRight)).Select
-    Range(Selection, Selection.End(xlDown)).Select
     Range(Selection, Selection.End(xlDown)).Select
     With Selection
         .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
         .WrapText = False
         .Orientation = 0
         .AddIndent = False
@@ -92,199 +87,127 @@ Sub Atualizar()
         .ReadingOrder = xlContext
         .MergeCells = False
     End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.Replace What:="   ", Replacement:="", LookAt:=xlPart, _
+        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False, FormulaVersion:=xlReplaceFormula2
+    Columns("D:D").EntireColumn.AutoFit
     Selection.Font.Size = 10
-    Columns("P:P").EntireColumn.AutoFit
-    Cells.Select
-    Cells.EntireColumn.AutoFit
+    Cells(9, 4).Select
+    Range(Selection, Selection.End(xlToRight)).Select
+    Selection.Font.Bold = True
     
-    'Ajustando as colunas de Retornave, CX Plastica, Refri...
     
-    Columns("Q:Q").ColumnWidth = 4.43
-    Columns("R:R").ColumnWidth = 4
-    Columns("S:S").ColumnWidth = 3.29
-    Columns("T:T").ColumnWidth = 3.14
-    Columns("U:U").ColumnWidth = 2.86
-    Columns("V:V").ColumnWidth = 3.86
-    Columns("W:W").ColumnWidth = 3.57
-    Columns("X:X").ColumnWidth = 3.71
-    Columns("Y:Y").ColumnWidth = 3
-    Columns("Z:Z").ColumnWidth = 4.57
-    Columns("AA:AA").ColumnWidth = 4
-    Columns("AB:AB").ColumnWidth = 4.86
+    'Configurando as Formulas
     
-    'Se 600ml < 30 Então....
-    
-    Range("AC10").Select
-    ActiveCell.FormulaR1C1 = "=IF([@[600ML.]]<30,""GIRO 600ML"","" "")"
-    
-    'Condição SE TIVER GIRO 600ML FICAR VERMELHO
-    
-    Range("AC10").Select
-    Selection.FormatConditions.Add Type:=xlTextString, String:="GIRO 600ML", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
-    With Selection.FormatConditions(1).Font
-        .Bold = True
-        .Italic = False
-        .TintAndShade = 0
-    End With
-    With Selection.FormatConditions(1).Interior
-        .PatternColorIndex = xlAutomatic
-        .Color = 255
-        .TintAndShade = 0
-    End With
-    Selection.FormatConditions(1).StopIfTrue = False
-    Selection.AutoFill Destination:=Range("Consulta5[MOTIVO]")
-    Range("Consulta5[MOTIVO]").Select
-    
-    'Inserindo e Formatando Coluna de FAT MED
-    
-    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
-    Range("Consulta5[[#Headers],[Coluna1]]").Select
-    ActiveCell.FormulaR1C1 = "FAT MED."
-    Range("P10").Select
-    
-    'Formatando coluna de LIBERAR
-    
-    Range("Consulta5[[#Headers],[LIBERAR]]").Select
-    With Selection.Interior
-        .Pattern = xlSolid
-        .PatternColorIndex = xlAutomatic
-        .Color = 65535
-        .TintAndShade = 0
-        .PatternTintAndShade = 0
-    End With
-    With Selection.Font
-        .ColorIndex = xlAutomatic
-        .TintAndShade = 0
-    End With
-    Range("Q10").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Range("Q10:Q46").Select
-    Selection.FormatConditions.Add Type:=xlTextString, String:="NÃO", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
-    With Selection.FormatConditions(1).Font
-        .Bold = True
-        .Italic = False
-        .TintAndShade = 0
-    End With
-    With Selection.FormatConditions(1).Interior
-        .PatternColorIndex = xlAutomatic
-        .Color = 255
-        .TintAndShade = 0
-    End With
-    Selection.FormatConditions(1).StopIfTrue = False
-    
-    'Formatando e ajustando todas as colunas
-    
+    Cells(10, 14).Select
     ActiveCell.FormulaR1C1 = _
-    "=SUMIF('HIST. CONSUMO'!C[-28],[@[COD. CLIENTE]],'HIST. CONSUMO'!C[-25])"
-    Range("AE11").Select
-    ActiveWindow.SmallScroll Down:=-33
-    Range("AE10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[600ML.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[600ML.]").Select
-    Range("AF10").Select
+        "=IF(TODAY()<TITL_CLIENTE!R[-8]C[-11],SUMIF(TITL_CLIENTE!C[-13],RC[-10],TITL_CLIENTE!C[-10]),0)"
+    Cells(10, 15).Select
     ActiveCell.FormulaR1C1 = _
-        "=SUMIF('HIST. CONSUMO'!C[-29],[@[COD. CLIENTE]],'HIST. CONSUMO'!C[-27])+SUMIF('HIST. CONSUMO'!C[-29],[@[COD. CLIENTE]],'HIST. CONSUMO'!C[-25])"
-    Range("AF10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[300ML.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[300ML.]").Select
-    Range("AG10").Select
+        "=IF(TODAY()>RC[1],SUMIF(TITL_CLIENTE!C[-14],RC[-11],TITL_CLIENTE!C[-11]),)"
+    Cells(10, 16).Select
     ActiveCell.FormulaR1C1 = _
-        "=SUMIF('HIST. CONSUMO'!C[-30],[@[COD. CLIENTE]],'HIST. CONSUMO'!C[-29])+SUMIF('HIST. CONSUMO'!C[-30],[@[COD. CLIENTE]],'HIST. CONSUMO'!C[-24])"
-    Range("AG10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[1L.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[1L.]").Select
-    Range("AD10").Select
-    ActiveCell.FormulaR1C1 = "=IF([@[600ML.]]<=30,""GIRO 600ML"","" "")"
-    Range("AD10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[MOTIVO]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[MOTIVO]").Select
-    Range("AJ10").Select
+        "=IFERROR(VLOOKUP(VALUE(RC[-12]),TITL_CLIENTE!C[-15]:C[-13],3,0),"""")"
+    Cells(10, 17).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(FAT_MEDIO!C[-16],RC[-13],FAT_MEDIO!C[-14])/3"
+    Cells(10, 18).Select
+    ActiveCell.FormulaR1C1 = "=IF(RC[-3]>0,""NÃO"",""LIBERAR"")"
+    Cells(10, 19).Select
     ActiveCell.FormulaR1C1 = _
-        "=COUNTIFS(CEV!C[-33],[@[COD. CLIENTE]],CEV!C[-33],[@[COD. CLIENTE]])"
-    Range("AJ10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[QNTD. COMODATO]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[QNTD. COMODATO]").Select
-    Range("AK10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-34],[@[COD. CLIENTE]],CEV!C[-33])"
-    Range("AK10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[[600ML  ]]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[[600ML  ]]").Select
-    ActiveWindow.ScrollColumn = 22
-    ActiveWindow.ScrollColumn = 23
-    Range("AL10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@[COD. CLIENTE]],CEV!C[-33])"
-    Range("AL10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[[300ML  ]]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[[300ML  ]]").Select
-    Range("AM10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@PEDIDO],CEV!C[-33])"
-    Range("AM10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[[1L  ]]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[[1L  ]]").Select
-    Range("AN10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@[RAZÃO SOCIAL]],CEV!C[-33])"
-    Range("AN10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[REFRI. PEQ]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[REFRI. PEQ]").Select
-    Range("AO10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@VD],CEV!C[-33])"
-    Range("AO10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[REFRI. GRAND]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[REFRI. GRAND]").Select
-    Range("AP10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@SUP],CEV!C[-33])"
-    Range("AP10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[MESA PLAST.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[MESA PLAST.]").Select
-    Range("AQ10").Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C[-35],[@PRAZO],CEV!C[-33])"
-    Range("AQ10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[MESA MAD.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[MESA MAD.]").Select
-    ActiveWindow.ScrollColumn = 22
-    ActiveWindow.ScrollColumn = 21
-    ActiveWindow.ScrollColumn = 20
-    ActiveWindow.ScrollColumn = 19
-    ActiveWindow.ScrollColumn = 18
-    ActiveWindow.ScrollColumn = 17
-    ActiveWindow.ScrollColumn = 16
-    ActiveWindow.ScrollColumn = 15
-    ActiveWindow.ScrollColumn = 14
-    ActiveWindow.ScrollColumn = 13
-    ActiveWindow.ScrollColumn = 12
-    ActiveWindow.ScrollColumn = 11
-    ActiveWindow.ScrollColumn = 10
-    ActiveWindow.ScrollColumn = 9
-    ActiveWindow.ScrollColumn = 8
-    Range("P10").Select
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-15],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 20).Select
     ActiveCell.FormulaR1C1 = _
-        "=SUMIF('Fat. Medio'!C[-15],[@[COD. CLIENTE]],'Fat. Medio'!C[-13])"
-    Range("P10").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"
-    Range("P10").Select
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-16],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 21).Select
     ActiveCell.FormulaR1C1 = _
-        "=SUMIF('Fat. Medio'!C[-15],[@[COD. CLIENTE]],'Fat. Medio'!C[-13])/3"
-    Range("P10").Select
-    Selection.AutoFill Destination:=Range("Consulta5[FAT MED.]"), Type:= _
-        xlFillDefault
-    Range("Consulta5[FAT MED.]").Select
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-17],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 22).Select
+    ActiveCell.FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-18],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 23).Select
+    ActiveCell.FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-19],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 24).Select
+    ActiveCell.FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C[-12],RC[-20],ITENS_PEDIDOS!C[-10])"
+    Cells(10, 25).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(RC[6]=0,"" "",IF(AND(RC[7]>=1,RC[1]=0),""GIRO ZERO 600ML"",IF(AND(RC[7]>=1,RC[1]<RC[7]*3),""BAIXO GIRO 600ML"",IF(AND(RC[8]>=1,RC[2]=0),""GIRO ZERO 300ML"",IF(AND(RC[8]>=1,RC[2]<RC[8]*3),""BAIXO GIRO 300ML"",IF(AND(RC[9]>=1,RC[3]=0),""GIRO ZERO 1L"",IF(AND(RC[9]>=1,RC[3]<RC[9]*3),""BAIXO GIRO 1L"","""")))))))"
+    Cells(10, 26).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-23],RC[-22],HIST_CONSUMO!C[-22])/3,"""")"
+    Cells(10, 27).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-24],RC[-23],HIST_CONSUMO!C[-21])/3,"""")"
+    Cells(10, 28).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-25],RC[-24],HIST_CONSUMO!C[-21])/3,"""")"
+    Cells(10, 29).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(AND(RC[6]>=1,SUMIF(FAT_MEDIO!C[-28],RC[-25],FAT_MEDIO!C[-26])/3<1000),1000-SUMIF(FAT_MEDIO!C[-28],RC[-25],FAT_MEDIO!C[-26])/3,"""")"
+    Cells(10, 30).Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(AND(RC[6]>=1,SUMIF(FAT_MEDIO!C[-29],RC[-26],FAT_MEDIO!C[-27])/3<1200),1200-SUMIF(FAT_MEDIO!C[-29],RC[-26],FAT_MEDIO!C[-27])/3,"""")"
+    Cells(10, 31).Select
+    ActiveCell.FormulaR1C1 = "=COUNTIF(CEV!C[-19],RC[-27])"
+    Cells(10, 32).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+    Cells(10, 33).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+    Cells(10, 34).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+    Cells(10, 35).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+    Cells(10, 36).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+    Cells(10, 37).Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(CEV!C2,RC4,CEV!C[-29])"
+  
+    'Sincronizando_Planilha_Manual
 
+    Sheets("ANALISE").Select
+    Range("D10").Select
+    
+    Cells(100000, 12).Select
+    Selection.End(xlUp).Select
+    ultimo = ActiveCell.Row
+        
+    Range(Cells(10, 14), Cells(10, 37)).Select
+    Selection.Copy
+
+    Range(Cells(11, 14), Cells(ultimo, 37)).Select
+    ActiveSheet.Paste
+    
+    Application.ScreenUpdating = True
+    
+    progresso.FormulasOK.Visible = True
+    progresso.atualizando = "Atualizado!!!"
+    
+    Application.Wait (Now + TimeValue("0:00:03"))
+    
+    Unload progresso
+    MsgBox "Atualização Finalizada com Sucesso"
+    
 End Sub
