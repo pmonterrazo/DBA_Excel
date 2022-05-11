@@ -1,105 +1,41 @@
-Sub Macro11()
-'
-' Macro11 Macro
-
-    Dim ultimo
-
-    Cells(100000, 2).Select
-    Selection.End(xlUp).select
-    ultimo = ActiveCell.Row
-
-
-    Application.ScreenUpdating = False
- 
-'
-    Range("J1").Select
-    ActiveCell.FormulaR1C1 = "COD CLI"
-    Range("K1").Select
-    ActiveCell.FormulaR1C1 = "600ML"
-    Range("L1").Select
-    ActiveCell.FormulaR1C1 = "300ML"
-    Range("M1").Select
-    ActiveCell.FormulaR1C1 = "1L"
-    Range("N1").Select
-    ActiveCell.FormulaR1C1 = "REFR. PEQ"
-    Range("O1").Select
-    ActiveCell.FormulaR1C1 = "REFR. GRND"
-    Range("P1").Select
-    ActiveCell.FormulaR1C1 = "MESA PLAS"
-    Range("J2").Select
-    ActiveCell.FormulaR1C1 = "=VALUE(RC[-8])"
-    Range("J2").Select
-    Selection.Copy
-    Selection.End(xlToLeft).Select
-    Selection.End(xlDown).Select
-    Selection.End(xlToRight).Select
-    Selection.End(xlToLeft).Select
-    Range("J6241").Select
-    ActiveSheet.Paste
-    Application.CutCopyMode = False
-    Selection.Copy
-    Range(Selection, Selection.End(xlUp)).Select
-    ActiveSheet.Paste
-    Application.CutCopyMode = False
-    Selection.End(xlToLeft).Select
-    Selection.End(xlUp).Select
-    Range("J2").Select
-    ActiveSheet.Range("$J$1:$O$6241").RemoveDuplicates Columns:=1, Header:= _
-        xlYes
-    Range(Selection, Selection.End(xlDown)).Select
-    Selection.Copy
-    Selection.End(xlUp).Select
-    Range("K2").Select
-    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
-        :=False, Transpose:=False
-    Application.CutCopyMode = False
-    Selection.Copy
-    Range("J3").Select
-    Selection.End(xlUp).Select
-    Range("J2").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Application.CutCopyMode = False
-    Selection.ClearContents
-    Selection.End(xlUp).Select
-    Range("K2").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Selection.Copy
-    Range("J2").Select
-    ActiveSheet.Paste
-    Range("K2").Select
-    Range(Selection, Selection.End(xlDown)).Select
-    Application.CutCopyMode = False
-    Selection.ClearContents
-
-    Range("J2").Select
-    ActiveSheet.Range("$J$1:$O$2238").RemoveDuplicates Columns:=1, Header:= _
-        xlYes
-
-    Cells(100000, 9).Select
-    Selection.End(xlUp).select
-    ultimo = ActiveCell.Row
-
-    Cells(2, 11).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C[-9],RC[-1],C[-8])"
-    Cells(2, 12).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C2,RC10,C[-8])"
-    Cells(2, 13).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C2,RC[-3],C[-8])"
-    Cells(2, 14).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C2,RC[-4],C[-8])"
-    Cells(2, 15).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C2,RC[-5],C[-8])"
-    Cells(2, 16).Select
-    ActiveCell.FormulaR1C1 = "=SUMIF(C2,RC[-6],C[-8])"
-
-    Range(Cells(2, 11), Cells(2, 16)).Select
-    Selection.Copy
-    Range(Cells(3, 11), Cells(ultimo, 18)).Select
-    ActiveSheet.Paste
-    
-End Sub
-
-
-=SE(AG10>=1;SEERRO(AG10*3-$AE10*3-SOMASE(HIST_CONSUMO!C:C;D10;HIST_CONSUMO!F:F););0)
-
-=SE(AG10>=1;(AG10*3)-SOMASE(HIST_CONSUMO!N:N;D10;HIST_CONSUMO!O:O);"")
+    Sheets("ANALISE").Select
+    Cells(10, 14).FormulaR1C1 = _
+        "=IFERROR(IF(VLOOKUP(RC[-10],TITL_CLIENTE!C[-13]:C[-11],3,0)>=TODAY(),SUMIFS(TITL_CLIENTE!C[-10],TITL_CLIENTE!C[-13],RC[-10],TITL_CLIENTE!C[-11],"">=""&TODAY()),""""),"""")"
+    Cells(10, 15).FormulaR1C1 = _
+        "=IFERROR(IF(VLOOKUP(RC[-11],TITL_CLIENTE!C[-14]:C[-12],3,0)<TODAY(),SUMIFS(TITL_CLIENTE!C[-11],TITL_CLIENTE!C[-14],RC[-11],TITL_CLIENTE!C[-12],""<""&TODAY()),""""),"""")"
+    Cells(10, 16).FormulaR1C1 = _
+        "=IFERROR(IF(VLOOKUP(RC[-12],TITL_CLIENTE!C[-15]:C[-13],3,0)<TODAY(),VLOOKUP(RC[-12],TITL_CLIENTE!C[-15]:C[-13],3,0),""""),"""")"
+    Cells(10, 17).FormulaR1C1 = "=SUMIF(FAT_MEDIO!C[-16],RC[-13],FAT_MEDIO!C[-14])/3"
+    Cells(10, 18).FormulaR1C1 = "=IF(RC[-2]<TODAY(),""NÃO"",""LIBERAR"")"
+    Cells(10, 19).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 20).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 21).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 22).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 23).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 24).FormulaR1C1 = _
+        "=SUMIF(ITENS_PEDIDOS!C1,RC4,ITENS_PEDIDOS!C[-16])"
+    Cells(10, 25).FormulaR1C1 = _
+       "=IF(RC[6]=0,"" "",IF(AND(RC[7]>=1,RC[1]=0),""GIRO ZERO 600ML"",IF(AND(RC[7]>=1,RC[1]<RC[7]*3),""BAIXO GIRO 600ML"",IF(AND(RC[8]>=1,RC[2]=0),""GIRO ZERO 300ML"",IF(AND(RC[8]>=1,RC[2]<RC[8]*3),""BAIXO GIRO 300ML"",IF(AND(RC[9]>=1,RC[3]=0),""GIRO ZERO 1L"",IF(AND(RC[9]>=1,RC[3]<RC[9]*3),""BAIXO GIRO 1L"","""")))))))"
+    Cells(10, 26).FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-23],RC[-22],HIST_CONSUMO!C[-22])/3,"""")"
+    Cells(10, 27).FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-24],RC[-23],HIST_CONSUMO!C[-21])/3,"""")"
+    Cells(10, 28).FormulaR1C1 = _
+        "=IF(RC[6]>=1,(RC[6]*3)-SUMIF(HIST_CONSUMO!C[-25],RC[-24],HIST_CONSUMO!C[-21])/3,"""")"
+    Cells(10, 29).FormulaR1C1 = _
+         "=IF(AND(RC[6]>=1,SUMIF(FAT_MEDIO!C[-28],RC[-25],FAT_MEDIO!C[-26])/3<1000),1000-SUMIF(FAT_MEDIO!C[-28],RC[-25],FAT_MEDIO!C[-26])/3,"""")"
+    Cells(10, 30).FormulaR1C1 = _
+       "=IF(AND(RC[6]>=1,SUMIF(FAT_MEDIO!C[-29],RC[-26],FAT_MEDIO!C[-27])/3<1200),1200-SUMIF(FAT_MEDIO!C[-29],RC[-26],FAT_MEDIO!C[-27])/3,"""")"
+    Cells(10, 31).FormulaR1C1 = "=COUNTIF(CEV!C[-18],RC[-27])"
+    Cells(10, 32).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(10, 33).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(10, 34).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(10, 35).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(10, 36).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(10, 37).FormulaR1C1 = "=SUMIF(CEV!C1,RC4,CEV!C[-29])"
+    Cells(8, 5).FormulaR1C1 = "=SUBTOTAL(3,R[2]C:R[684]C)"
