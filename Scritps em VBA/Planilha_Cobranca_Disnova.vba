@@ -67,52 +67,16 @@ Sub Atualizacao_Planilha()
     Sheets("Analises").Select
     Sheets("Titulo Aberto").Visible = True
     
-    Application.ScreenUpdating = True
-    
-    DoEvents
-    PERCENTUAL = 1500 / Total
-    usfBarraEvolucao.lblBarraEvolucao.Width = PERCENTUAL * Largura
-    usfBarraEvolucao.lblValor = Round(PERCENTUAL * 100, 1) & "%"
-    
-    Application.ScreenUpdating = False
-    
     Sheets("Analises").Select
     Sheets("Cadastro de Cliente").Visible = True
-    
-    Application.ScreenUpdating = True
-    
-    DoEvents
-    PERCENTUAL = 1700 / Total
-    usfBarraEvolucao.lblBarraEvolucao.Width = PERCENTUAL * Largura
-    usfBarraEvolucao.lblValor = Round(PERCENTUAL * 100, 1) & "%"
-    
-    Application.ScreenUpdating = False
     
     Sheets("Titulo Aberto").Select
     Cells(1, 1).Select
     Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
     
-    Application.ScreenUpdating = True
-    
-    DoEvents
-    PERCENTUAL = 1800 / Total
-    usfBarraEvolucao.lblBarraEvolucao.Width = PERCENTUAL * Largura
-    usfBarraEvolucao.lblValor = Round(PERCENTUAL * 100, 1) & "%"
-    
-    Application.ScreenUpdating = False
-    
     Sheets("Titulo Aberto").Select
     Cells(1, 22).Select
     Selection.ListObject.QueryTable.Refresh BackgroundQuery:=False
-    
-    Application.ScreenUpdating = True
-    
-    DoEvents
-    PERCENTUAL = 2000 / Total
-    usfBarraEvolucao.lblBarraEvolucao.Width = PERCENTUAL * Largura
-    usfBarraEvolucao.lblValor = Round(PERCENTUAL * 100, 1) & "%"
-    
-    Application.ScreenUpdating = False
     
     
     Sheets("Cadastro de Cliente").Select
@@ -122,7 +86,7 @@ Sub Atualizacao_Planilha()
     Application.ScreenUpdating = True
     
     DoEvents
-    PERCENTUAL = 2500 / Total
+    PERCENTUAL = 2000 / Total
     usfBarraEvolucao.lblBarraEvolucao.Width = PERCENTUAL * Largura
     usfBarraEvolucao.lblValor = Round(PERCENTUAL * 100, 1) & "%"
     
@@ -148,7 +112,7 @@ Sub Atualizacao_Planilha()
     'COPIANDO AS COLUNAS TITULOS E CODIGO DO CLIENTE DA PLANILHA DE TITULOS ABERTOS
     
     Sheets("Analises").Select
-    Range(Cells(8, 5), Cells(1000000, 24)).Select
+    Range(Cells(8, 5), Cells(1000000, 28)).Select
     Selection.EntireRow.Delete
     
     Sheets("Titulo Aberto").Select
@@ -166,8 +130,6 @@ Sub Atualizacao_Planilha()
     
     'ADICIONANDO AS FORMULAS NAS CELULAS PRINCIPAIS DA PLANILHA ANALISES
     
-    Sheets("Analises").Select
-    
     Cells(8, 7).FormulaR1C1 = "=VLOOKUP(RC[-1],'Cadastro de Cliente'!C[-6]:C[-4],2,0)"
     Cells(8, 8).FormulaR1C1 = "=VLOOKUP(RC[-2],'Cadastro de Cliente'!C[-7]:C[-5],3,0)"
     Cells(8, 9).FormulaR1C1 = "=VLOOKUP(RC[-4],'Titulo Aberto'!C[-8]:C[-5],4,0)"
@@ -179,34 +141,21 @@ Sub Atualizacao_Planilha()
     Cells(8, 14).FormulaR1C1 = "=IF(SUMIF('Titulo Aberto'!C[8],RC[-9],'Titulo Aberto'!C[10])>1,SUMIF('Titulo Aberto'!C[8],RC[-9],'Titulo Aberto'!C[10]),RC[1])"
     
     Cells(8, 15).FormulaR1C1 = "=SUMIF('Titulo Aberto'!C[-14],RC[-10],'Titulo Aberto'!C[-5])"
-    Cells(8, 16).FormulaR1C1 = "=SUMIF('Titulo Aberto'!C[10],RC[-11],'Titulo Aberto'!C[12])"
-    Cells(8, 17).FormulaR1C1 = "=RC[-2]+RC[-1]"
+    Cells(8, 16).FormulaR1C1 = "=SUMIF('Titulo Aberto'!C[-15],RC[-11],'Titulo Aberto'!C[-5])"
+    Cells(8, 17).FormulaR1C1 = "=SUM(RC[-2]:RC[-1])"
     
     Cells(8, 18).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-17]:C[-13],4,0)"
     Cells(8, 19).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-18]:C[-14],5,0)"
     Cells(8, 20).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-19]:C[-11],9,0)"
     Cells(8, 21).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-20]:C[-11],10,0)"
     Cells(8, 22).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-21]:C[-11],11,0)"
-    
     Cells(8, 23).FormulaR1C1 = "=YEAR(RC[-14])"
     Cells(8, 24).FormulaR1C1 = "=VLOOKUP(RC[-18],'Cadastro de Cliente'!C[-23]:C[-17],7,0)"
-
-
-    'ADICAO EXCLUSIVA DISNOVA - CONTROLE ASI
-
-    Cells(8, 25).FormulaR1C1 = "=IFERROR(RC[1]-RC[-15],""-"")"
-    Cells(8, 26).FormulaR1C1 = "=IFERROR(IF(OR(LEFT(RC[-18],8)=""BOMPRECO"",LEFT(RC[-18],6)=""SENDAS"",LEFT(RC[-18],8)=""ATACADAO"",LEFT(RC[-18],22)=""SUPERMERCADO NORDESTAO"",LEFT(RC[-18],9)=""COMPANHIA""),RC[-17]+DAY(28),IF(RC[-18],3)=""WMS""),RC[-16])"
-    Cells(8, 27).FormulaR1C1 = "=IF(LEFT(RC[-19],9)=""CARREFOUR"",""9,80%"",IF(LEFT(RC[-19],8)=""SENDAS"",""3,00%"",IF(LEFT(RC[-19],3)=""WMS"",1%,IF(LEFT(RC[-19],8)=""ATACADAO"",""1,00%"",IF(LEFT(RC[-19],22)=""SUPERMERCADO NORDESTAO"",""9,00%"",IF(LEFT(RC[-19],9)=""COMPANHIA"",""9,53%"",IF(LEFT(RC[-19],34)=""BOMPRECO SUPERMERCADOS DO NORDESTE"",""9,53%"",""-"")))))))"
-    Cells(8, 28).FormulaR1C1 = "=IFERROR(((RC[-14]*RC[-1])*-1)+RC[-14],RC[-14])"
     
-    Sheets("Titulo Aberto").Select
-    
-    Range(Cells(2, 26), Cells(ultimo, 28)).Select
-    Selection.Clear
-    
-    Cells(8, 26).FormulaR1C1 = "=RC[-25]"
-    Cells(8, 27).FormulaR1C1 = "=DAYS360(RC[-22],TODAY())"
-    Cells(8, 28).FormulaR1C1 = "=(RC[-1]*0.003*RC[-18])-RC[-18]"
+    Cells(8, 25).FormulaR1C1 = "=IF((RC[1]-RC[-15])>0,RC[1]-RC[-15],)"
+    Cells(8, 26).FormulaR1C1 = "=IF(LEFT(RC[-18],9)=""COMPANHIA"",RC[-17]+40,IF(DAY(RC[-17])<=20,IF(OR(LEFT(RC[-18],8)=""BOMPRECO"",LEFT(RC[-18],6)=""SENDAS"",LEFT(RC[-18],8)=""ATACADAO"",LEFT(RC[-18],22)=""SUPERMERCADO NORDESTAO"",LEFT(RC[-18],3)=""WMS""),DATE(YEAR(RC[-16]),MONTH(RC[-16]),DAY(14)),IF(LEFT(RC[-18],9)=""CARREFOUR"",DATE(YEAR(RC[-16]),MONTH(RC[-16]),DAY(20)),RC[-16])),RC[-16]))"
+    Cells(8, 27).FormulaR1C1 = "=IF(LEFT(RC[-19],6)=""SENDAS"",""3,00%"",IF(LEFT(RC[-19],3)=""WMS"",""1,00%"",IF(LEFT(RC[-19],8)=""ATACADAO"",""1,00%"",IF(LEFT(RC[-19],22)=""SUPERMERCADO NORDESTAO"",""9,00%"",IF(LEFT(RC[-19],9)=""COMPANHIA"",""9,53%"",IF(LEFT(RC[-19],34)=""BOMPRECO SUPERMERCADOS DO NORDESTE"",""1,00%"",IF(LEFT(RC[-19],9)=""CARREFOUR"",""11,30%"",""0,00%"")))))))"
+    Cells(8, 28).FormulaR1C1 = "=((RC[-14]*RC[-1])*-1)+RC[-14]"
     
     
     'FIM DA ADICAO AS FORMULAS NAS CELULAS PRINCIPAIS DA PLANILHA ANALISES
@@ -232,7 +181,7 @@ Sub Atualizacao_Planilha()
     
     
     
-    'COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 28 )
+    'COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 24 )
     
     Sheets("Analises").Select
     
@@ -242,7 +191,7 @@ Sub Atualizacao_Planilha()
     Range(Cells(9, 7), Cells(ultimo, 28)).Select
     ActiveSheet.Paste
      
-    'FIM  --- > COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 28 )
+    'FIM  --- > COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 24 )
     
     
     
@@ -306,19 +255,6 @@ Sub Atualizacao_Planilha()
     
     Application.ScreenUpdating = False
     
-    Range(Cells(2, 26), Cells(2, 28)).Select
-    Selection.Copy
-    
-    Range(Cells(3, 26), Cells(ultimo, 28)).Select
-    ActiveSheet.Paste
-    
-    Range(Cells(3, 26), Cells(ultimo, 28)).Select
-    Selection.Copy
-    
-    Cells(2, 26).Select
-    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
-        :=False, Transpose:=False
-    
     'FIM --- > FORMATANDO AS COLUNAS NO TITULOS ABERTOS
     
        
@@ -326,7 +262,7 @@ Sub Atualizacao_Planilha()
     
     Sheets("Analises").Select
     
-    Range(Cells(9, 5), Cells(ultimo, 24)).Select
+    Range(Cells(9, 5), Cells(ultimo, 28)).Select
 
     Columns("E:E").EntireColumn.AutoFit
     Columns("F:F").EntireColumn.AutoFit
@@ -441,7 +377,7 @@ Sub Atualizacao_Planilha()
         :=False, Transpose:=False
 
         
-    Range(Cells(8, 5), Cells(ultimo, 24)).Select
+    Range(Cells(8, 5), Cells(ultimo, 28)).Select
     Selection.Copy
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
@@ -457,6 +393,20 @@ Sub Atualizacao_Planilha()
     Selection.Font.Size = 12
     
     Cells(6, 15).Select
+    With Selection.Font
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = 0
+    End With
+    With Selection.Font
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = 0
+    End With
+    Selection.Font.Bold = False
+    Selection.Font.Bold = True
+    Selection.Font.Size = 14
+    Selection.Font.Size = 12
+    
+    Cells(6, 28).Select
     With Selection.Font
         .ThemeColor = xlThemeColorDark1
         .TintAndShade = 0
@@ -497,5 +447,3 @@ Sub Atualizacao_Planilha()
     
     
 End Sub
-
-
