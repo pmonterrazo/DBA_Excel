@@ -188,9 +188,16 @@ Sub Atualizacao_Planilha()
     Cells(8, 21).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-20]:C[-11],10,0)"
     Cells(8, 22).FormulaR1C1 = "=VLOOKUP([@[COD.CLI]],'Cadastro de Cliente'!C[-21]:C[-11],11,0)"
     
-    
     Cells(8, 23).FormulaR1C1 = "=YEAR(RC[-14])"
     Cells(8, 24).FormulaR1C1 = "=VLOOKUP(RC[-18],'Cadastro de Cliente'!C[-23]:C[-17],7,0)"
+
+
+    'ADICAO EXCLUSIVA DISNOVA - CONTROLE ASI
+
+    Cells(8, 25).FormulaR1C1 = "=IFERROR(RC[1]-RC[-15],""-"")"
+    Cells(8, 26).FormulaR1C1 = "=IFERROR(IF(OR(LEFT(RC[-18],8)=""BOMPRECO"",LEFT(RC[-18],6)=""SENDAS"",LEFT(RC[-18],8)=""ATACADAO"",LEFT(RC[-18],22)=""SUPERMERCADO NORDESTAO"",LEFT(RC[-18],9)=""COMPANHIA""),RC[-17]+DAY(28),IF(RC[-18],3)=""WMS""),RC[-16])"
+    Cells(8, 27).FormulaR1C1 = "=IF(LEFT(RC[-19],9)=""CARREFOUR"",""9,80%"",IF(LEFT(RC[-19],8)=""SENDAS"",""3,00%"",IF(LEFT(RC[-19],3)=""WMS"",1%,IF(LEFT(RC[-19],8)=""ATACADAO"",""1,00%"",IF(LEFT(RC[-19],22)=""SUPERMERCADO NORDESTAO"",""9,00%"",IF(LEFT(RC[-19],9)=""COMPANHIA"",""9,53%"",IF(LEFT(RC[-19],34)=""BOMPRECO SUPERMERCADOS DO NORDESTE"",""9,53%"",""-"")))))))"
+    Cells(8, 28).FormulaR1C1 = "=IFERROR(((RC[-14]*RC[-1])*-1)+RC[-14],RC[-14])"
     
     Sheets("Titulo Aberto").Select
     
@@ -198,8 +205,8 @@ Sub Atualizacao_Planilha()
     Selection.Clear
     
     Cells(8, 26).FormulaR1C1 = "=RC[-25]"
-    Cells(8, 27).FormulaR1C1 = "=DAYS360(RC[-22],RC[-23])"
-    Cells(8, 28).FormulaR1C1 = "=RC[-1]*0.003"
+    Cells(8, 27).FormulaR1C1 = "=DAYS360(RC[-22],TODAY())"
+    Cells(8, 28).FormulaR1C1 = "=(RC[-1]*0.003*RC[-18])-RC[-18]"
     
     
     'FIM DA ADICAO AS FORMULAS NAS CELULAS PRINCIPAIS DA PLANILHA ANALISES
@@ -225,17 +232,17 @@ Sub Atualizacao_Planilha()
     
     
     
-    'COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 24 )
+    'COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 28 )
     
     Sheets("Analises").Select
     
-    Range(Cells(8, 7), Cells(8, 24)).Select
+    Range(Cells(8, 7), Cells(8, 28)).Select
     Selection.Copy
     
-    Range(Cells(9, 7), Cells(ultimo, 24)).Select
+    Range(Cells(9, 7), Cells(ultimo, 28)).Select
     ActiveSheet.Paste
      
-    'FIM  --- > COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 24 )
+    'FIM  --- > COPIANDO AS LINHAS PRINCIPAIS DA COLUNA G ATÉ X ( OU SEJA DA 7 A 28 )
     
     
     
@@ -323,6 +330,8 @@ Sub Atualizacao_Planilha()
 
     Columns("E:E").EntireColumn.AutoFit
     Columns("F:F").EntireColumn.AutoFit
+    Columns("G:G").EntireColumn.AutoFit
+    Columns("H:H").EntireColumn.AutoFit
     Columns("I:I").EntireColumn.AutoFit
     Columns("J:J").EntireColumn.AutoFit
     Columns("J:J").ColumnWidth = 13
@@ -341,6 +350,10 @@ Sub Atualizacao_Planilha()
     Columns("W:W").EntireColumn.AutoFit
     Columns("X:X").EntireColumn.AutoFit
     Columns("G:G").EntireColumn.AutoFit
+    Columns("Y:Y").ColumnWidth = 13
+    Columns("Z:Z").ColumnWidth = 12.57
+    Columns("AA:AA").ColumnWidth = 8.86
+    Columns("AB:AB").ColumnWidth = 20.43
     
     Application.ScreenUpdating = True
     
