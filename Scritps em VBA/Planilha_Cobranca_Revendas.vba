@@ -15,7 +15,9 @@ Largura = usfBarraEvolucao.lblBarraEvolucao.Width
 End Sub
 
 Sub Limpar_Filtros()
-'Updated by Extendoffice 20210625
+
+'Limpar todos filtros de todas as Planilhas.
+
     Dim xAF As AutoFilter
     Dim xFs As Filters
     Dim xLos As ListObjects
