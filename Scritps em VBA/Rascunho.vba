@@ -1,8 +1,70 @@
-=SE(ESQUERDA(H8;9)="COMPANHIA";L8+40;SE(DIA(I8)<=20;OU(ESQUERDA(H8;8)="BOMPRECO";ESQUERDA(H8;6)="SENDAS";ESQUERDA(H8;8)="ATACADAO";ESQUERDA(H8;22)="SUPERMERCADO NORDESTAO";ESQUERDA(H8;3)="WMS");
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+   If CloseMode = vbFormControlMenu Then
+      MsgBox "Use o Botão de FECHAR Abaixo!"
+      Cancel = True
+   End If
+   
+End Sub
 
+Private Sub btnConsulta_Click()
+    If cbOcoStatus = "" Then
+        MsgBox "Selecione a Ocorrencia"
+        Exit Sub
+    End If
+    
+    Dim linha
+    
+    Dim ultimo
+    Sheets("Analise").Select
+    Cells(1000000, 1).Select
+    Selection.End(xlUp).Select
+    ultimo = ActiveCell.Row
+    
+    For linha = 6 To ultimo
+        If Cells(linha, 1) = cbOcoStatus Then
+            If Cells(linha, 3) = "ATIVO" Then
+                cxAtivo.BackColor = RGB(0, 255, 0)
+            Else
+                cxAtivo.BackColor = RGB(220, 20, 60)
+            End If
+        End If
+     Next
+     
+    For linha = 6 To ultimo
+        If Cells(linha, 1) = cbOcoStatus Then
+            If Cells(linha, 4) = "DISPON. PALM" Then
+                cxInativo.BackColor = RGB(0, 255, 0)
+            Else
+                cxInativo.BackColor = RGB(220, 20, 60)
+            End If
+        End If
+     Next
+    
+     
 
-=SE(ESQUERDA(F5;8)="SENDAS";"3,00%";SE(ESQUERDA(F5;3)="WMS";1%;SE(ESQUERDA(F5;8)="ATACADAO";"1,00%";SE(ESQUERDA(F5;22)="SUPERMERCADO NORDESTAO";"9,00%";SE(ESQUERDA(F5;9)="COMPANHIA";"9,53%";SE(ESQUERDA(F5;34)="BOMPRECO SUPERMERCADOS DO NORDESTE";"9,53%";"-"))))))
+    Sheets("Analise").Select
+    Cells(1000000, 6).Select
+    Selection.End(xlUp).Select
+    ultimo = ActiveCell.Row
+    
+    For linha = 6 To ultimo
+        If Cells(linha, 6) = cbOcoStatus Then
+            edtValor = FormatCurrency(Cells(linha, 7), 2)
+            Exit For
+        Else
+            edtValor.Text = "Sem Movimento"
+            
+        End If
+     Next
+     
+        
+End Sub
 
-=SE(ESQUERDA(H8;9)="COMPANHIA";I8+40;SE(DIA(I8)<=20;SE(OU(ESQUERDA(H8;8)="BOMPRECO";ESQUERDA(H8;6)="SENDAS";ESQUERDA(H8;8)="ATACADAO";ESQUERDA(H8;22)="SUPERMERCADO NORDESTAO";ESQUERDA(H8;3)="WMS");DATA(ANO(J8);MÊS(J8);DIA(14));SE(ESQUERDA(H8;9)="CARREFOUR";DATA(ANO(J8);MÊS(J8);DIA(20));J8));J8))
+Private Sub CommandButton1_Click()
 
-=VALOR(SEERRO(SE(ESQUERDA(C10;LOCALIZAR(" ";C10;1)-1)='Dados AS'!$A$2;E10+'Dados AS'!$B$2;SE(ESQUERDA(C10;LOCALIZAR(" ";C10;1)-1)='Dados AS'!$C$4;E10+'Dados AS'!$B$2;SE(ESQUERDA(C10;LOCALIZAR(" ";C10;1)+9)='Dados AS'!$C$6;E10+'Dados AS'!$B$3;SE(DIA(F10)<=20;CONCATENAR(PROCV(ESQUERDA(C10;LOCALIZAR(" ";C10;1)-1);'Dados AS'!$D$2:'Dados AS'!$E$8;2;FALSO);"/";MÊS(F10);"/";ANO(F10));CONCATENAR(PROCV(ESQUERDA(C10;LOCALIZAR(" ";C10;1)-1);'Dados AS'!$D$2:'Dados AS'!$E$8;2;FALSO);"/";MÊS(F10+30);"/";SE(MÊS(F10)=12;ANO(F10)+1;ANO(F10)))))));F10))
+End Sub
+
+Private Sub CommandButton2_Click()
+Workbooks("Automacao_ocorrencia.xlsm").Close
+End Sub
+
